@@ -1,12 +1,23 @@
-class AppComponent extends HTMLElement {
-  connectedCallback() {
-    this.innerHTML = `
-      <div>
-        <h1>App 1 Host (Web Component)</h1>
-        <remote-config></remote-config>
-      </div>
-    `;
-  }
-}
+import React, { useEffect, useRef } from 'react';
 
-customElements.define('app-component', AppComponent);
+const App: React.FC = () => {
+  const walletRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    import('walletApp/WalletWebComponent').then(() => {
+      if (walletRef.current) {
+        const walletElement = document.createElement('wallet-component');
+        walletRef.current.appendChild(walletElement);
+      }
+    });
+  }, []);
+
+  return (
+    <div>
+      <h1>Host App</h1>
+      <div ref={walletRef}></div>
+    </div>
+  );
+};
+
+export default App;

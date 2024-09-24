@@ -1,10 +1,10 @@
-import './App';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 
-const app = document.createElement('app-component');
-document.body.appendChild(app);
-
-
-import('remoteApp/Config').then((module) => {
-  const RemoteConfig = module.default;
-  customElements.define('remote-config', RemoteConfig);
-});
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import WalletComponent from './WalletComponent';
 
 class WalletWebComponent extends HTMLElement {
@@ -7,8 +7,11 @@ class WalletWebComponent extends HTMLElement {
     const mountPoint = document.createElement('div');
     this.attachShadow({ mode: 'open' }).appendChild(mountPoint);
 
-    ReactDOM.render(<WalletComponent />, mountPoint);
+    const root = ReactDOM.createRoot(mountPoint);
+    root.render(<WalletComponent />);
   }
 }
 
 customElements.define('wallet-component', WalletWebComponent);
+
+export default WalletWebComponent;

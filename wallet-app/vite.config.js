@@ -6,15 +6,16 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "remoteApp",
+      name: "wallet-app",
       filename: "remoteEntry.js",
       exposes: {
-        "./Config": "./src/component/Config.tsx",
+        "./WalletWebComponent": "./src/components/WalletWebComponent.tsx",
       },
       shared: ["react", "react-dom"],
     }),
   ],
   build: {
+    modulePreload: false,
     target: "esnext",
     minify: false,
     cssCodeSplit: false,
